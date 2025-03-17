@@ -95,7 +95,7 @@ $result = $con->query($sql);
             $con->close();
             ?>
         </table>
-        <a href="index.php" class="back-button">Back to Registration</a>
+        <a href="book.php" class="back-button">Back to Registration</a>
     </div>
 </body>
 </html>
