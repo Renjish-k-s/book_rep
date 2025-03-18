@@ -1,38 +1,4 @@
-<?php 
-include 'config.php'; 
-
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     $book_name = trim($_POST['book_name']);
-//     $price = trim($_POST['price']);
-//     $genre = trim($_POST['genre']);
-    
-//     // Validate inputs
-//     if (!empty($book_name) && !empty($price) && !empty($genre)) {
-//         // Prepare the SQL statement
-//         $stmt = $con->prepare("INSERT INTO books (book_name, price, genre) VALUES (?, ?, ?)");
-
-//         if ($stmt) {
-//             $stmt->bind_param("sss", $book_name, $price, $genre);
-            
-//             if ($stmt->execute()) {
-//                 $message = "Book registered successfully!";
-//                 $msgType = "success";
-//             } else {
-    //             $message = "Error registering book.";
-    //             $msgType = "error";
-    //         }
-
-    //         $stmt->close();
-    //     } else {
-    //         $message = "Database error.";
-    //         $msgType = "error";
-    //     }
-    // } else {
-    //     $message = "All fields are required!";
-        $msgType = "error";
-//     }
-// }
-?>
+<?php include 'config.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -94,32 +60,11 @@ include 'config.php';
         button:hover {
             background: #4c51bf;
         }
-        .message {
-            padding: 10px;
-            text-align: center;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Register a Book</h2>
-
-        <?php if (isset($message)): ?>
-            <div class="message <?= $msgType ?>"><?= $message ?></div>
-        <?php endif; ?>
 
         <form action="" method="POST">
             <label for="book_name">Book Name:</label>
@@ -141,25 +86,15 @@ include 'config.php';
             </select>
             
             <div class="button-container">
-                <button type="submit">Register Book</button>
-                <a href="display.php">
-                    <button type="submit" name="insert_book">View Book List</button>
-                </a>
+                <button type="submit" name="register">Register Book</button>
             </div>
         </form>
+
+        <?php
+        if (isset($_POST['register'])) {
+            echo "<script>alert('Book registered successfully!');</script>";
+        }
+        ?>
     </div>
 </body>
 </html>
-<?php
-
-if(isset($_POST['insert_book']))
-{
-
-echo "<script>alert('inserted')</script>";
-}
-
-?>
-
-
-<?php $con->close(); ?>
-            
