@@ -23,7 +23,7 @@ try {
     // Check if the connection is successful
     if ($con->ping()) {
         // Remove this in production, used only for debugging
-        echo "✅ Database connected successfully!";
+      //  echo "✅ Database connected successfully!";
     }
 
 } catch (mysqli_sql_exception $e) {
