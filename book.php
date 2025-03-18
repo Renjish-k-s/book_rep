@@ -87,6 +87,7 @@
             
             <div class="button-container">
                 <button type="submit" name="register">Register Book</button>
+                <a href="display.php">Books History</a>
             </div>
         </form>
 
