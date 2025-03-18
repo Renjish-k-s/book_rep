@@ -91,20 +91,30 @@
         </form>
 
         <?php
-        if (isset($_POST['register'])) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
+            // Check if DB connection is established
+            if (!$con) {
+                die("<script>alert('Database connection failed!');</script>");
+            }
 
             $book_name = trim($_POST['book_name']);
             $price = trim($_POST['price']);
             $genre = trim($_POST['genre']);
+
+            // Ensure DB connection & SQL execution in Azure
             $stmt = $con->prepare("INSERT INTO books (book_name, price, genre) VALUES (?, ?, ?)");
+            if (!$stmt) {
+                die("<script>alert('SQL Preparation Failed!');</script>");
+            }
+
             $stmt->bind_param("sss", $book_name, $price, $genre);
-           if ($stmt->execute()) {
-                    echo "<script>alert('Book registered successfully!');</script>";
+            
+            if ($stmt->execute()) {
+                echo "<script>alert('Book registered successfully!'); window.location.href='';</script>";
             } else {
-                    echo "<script>alert('Book registerion failed!');</script>";
+                echo "<script>alert('Book registration failed!');</script>";
             }
             $stmt->close();
-
         }
         ?>
     </div>
