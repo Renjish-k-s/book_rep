@@ -4,15 +4,15 @@
 
 // Define database connection parameters only if they are not already defined
 if (!defined('DB_HOST')) {
-    define('DB_HOST', 'localhost');
+    define('DB_HOST', 'booky-server.mysql.database.azure.com');
 }
 
 if (!defined('DB_USER')) {
-    define('DB_USER', 'root');
+    define('DB_USER', 'renjishksimon');
 }
 
 if (!defined('DB_PASS')) {
-    define('DB_PASS', '');
+    define('DB_PASS', 'ram@1234$');
 }
 
 if (!defined('DB_NAME')) {
