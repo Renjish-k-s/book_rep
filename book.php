@@ -1,37 +1,37 @@
 <?php 
 include 'config.php'; 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $book_name = trim($_POST['book_name']);
-    $price = trim($_POST['price']);
-    $genre = trim($_POST['genre']);
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $book_name = trim($_POST['book_name']);
+//     $price = trim($_POST['price']);
+//     $genre = trim($_POST['genre']);
     
-    // Validate inputs
-    if (!empty($book_name) && !empty($price) && !empty($genre)) {
-        // Prepare the SQL statement
-        $stmt = $con->prepare("INSERT INTO books (book_name, price, genre) VALUES (?, ?, ?)");
+//     // Validate inputs
+//     if (!empty($book_name) && !empty($price) && !empty($genre)) {
+//         // Prepare the SQL statement
+//         $stmt = $con->prepare("INSERT INTO books (book_name, price, genre) VALUES (?, ?, ?)");
 
-        if ($stmt) {
-            $stmt->bind_param("sss", $book_name, $price, $genre);
+//         if ($stmt) {
+//             $stmt->bind_param("sss", $book_name, $price, $genre);
             
-            if ($stmt->execute()) {
-                $message = "Book registered successfully!";
-                $msgType = "success";
-            } else {
-                $message = "Error registering book.";
-                $msgType = "error";
-            }
+//             if ($stmt->execute()) {
+//                 $message = "Book registered successfully!";
+//                 $msgType = "success";
+//             } else {
+    //             $message = "Error registering book.";
+    //             $msgType = "error";
+    //         }
 
-            $stmt->close();
-        } else {
-            $message = "Database error.";
-            $msgType = "error";
-        }
-    } else {
-        $message = "All fields are required!";
+    //         $stmt->close();
+    //     } else {
+    //         $message = "Database error.";
+    //         $msgType = "error";
+    //     }
+    // } else {
+    //     $message = "All fields are required!";
         $msgType = "error";
-    }
-}
+//     }
+// }
 ?>
 
 <!DOCTYPE html>
@@ -143,13 +143,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="button-container">
                 <button type="submit">Register Book</button>
                 <a href="display.php">
-                    <button type="button">View Book List</button>
+                    <button type="submit" name="insert_book">View Book List</button>
                 </a>
             </div>
         </form>
     </div>
 </body>
 </html>
+<?php
+
+if(isset($_POST['insert_book']))
+{
+
+echo '<script>alert("inserted")</script>';
+}
+
+?>
+
 
 <?php $con->close(); ?>
             
