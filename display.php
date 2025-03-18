@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
 // Fetch books
-$sql = "SELECT id, book_name, price, genre, created_at FROM books";
+$sql = "SELECT id, book_name, price, genre FROM books";
 $result = $con->query($sql);
 ?>
 
@@ -86,7 +86,6 @@ $result = $con->query($sql);
                             <td>{$row['book_name']}</td>
                             <td>{$row['price']}</td>
                             <td>{$row['genre']}</td>
-                            <td>{$row['created_at']}</td>
                           </tr>";
                 }
             } else {
