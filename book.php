@@ -155,7 +155,7 @@ include 'config.php';
 if(isset($_POST['insert_book']))
 {
 
-echo '<script>alert("inserted")</script>';
+echo "<script>alert('inserted')</script>";
 }
 
 ?>
