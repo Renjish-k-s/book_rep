@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $con->prepare("INSERT INTO books (book_name, price, genre) VALUES (?, ?, ?)");
 
         if ($stmt) {
-            $stmt->bind_param("sds", $book_name, $price, $genre);
+            $stmt->bind_param("sss", $book_name, $price, $genre);
             
             if ($stmt->execute()) {
                 $message = "Book registered successfully!";
