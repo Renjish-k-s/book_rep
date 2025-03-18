@@ -92,7 +92,19 @@
 
         <?php
         if (isset($_POST['register'])) {
-            echo "<script>alert('Book registered successfully!');</script>";
+
+            $book_name = trim($_POST['book_name']);
+            $price = trim($_POST['price']);
+            $genre = trim($_POST['genre']);
+            $stmt = $con->prepare("INSERT INTO books (book_name, price, genre) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $book_name, $price, $genre);
+           if ($stmt->execute()) {
+                    echo "<script>alert('Book registered successfully!');</script>";
+            } else {
+                    echo "<script>alert('Book registerion failed!');</script>";
+            }
+            $stmt->close();
+
         }
         ?>
     </div>
