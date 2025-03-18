@@ -1,40 +1,33 @@
 <?php
-// Start the session only if it hasn't been started yet
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
+// Define database connection parameters
+define('DB_HOST', 'booky-server.mysql.database.azure.com'); // Check correct Azure hostname
+define('DB_USER', 'renjishksimon');
+define('DB_PASS', 'ram@1234$');
+define('DB_NAME', 'booky');
+define('DB_PORT', 3306); // Azure default MySQL port
 
-// Define database connection parameters only if they are not already defined
-if (!defined('DB_HOST')) {
-    define('DB_HOST', 'booky-server.mysql.database.azure.com');
-}
-
-if (!defined('DB_USER')) {
-    define('DB_USER', 'renjishksimon');
-}
-
-if (!defined('DB_PASS')) {
-    define('DB_PASS', 'ram@1234$');
-}
-
-if (!defined('DB_NAME')) {
-    define('DB_NAME', 'booky');
-}
-
-// Enable error reporting for MySQLi to catch issues
+// Enable MySQLi error reporting
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 try {
-    // Establish a connection to the MySQL database
-    $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    // Connect with SSL (Azure requires SSL connections)
+    $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT, '/ssl/DigiCertGlobalRootCA.crt.pem');
 
-    // Set the charset to avoid potential encoding issues
+    // Set UTF-8 encoding
     $con->set_charset("utf8");
 
-} catch (mysqli_sql_exception $e) {
-    // Log the error for debugging (optional)
-    error_log("Database connection error: " . $e->getMessage());
+    // Check if the connection is successful
+    if ($con->ping()) {
+        // Remove this in production, used only for debugging
+        echo "✅ Database connected successfully!";
+    }
 
-    // Redirect to the error page
-    header("Location: error.php");
-    exit();
+} catch (mysqli_sql_exception $e) {
+    // Display error message (Use only during debugging)
+    die("❌ Database connection error: " . $e->getMessage());
 }
 ?>
